@@ -1,0 +1,40 @@
+Source: qt-fsarchiver
+Section: utils
+Priority: optional
+Maintainer: Kevin Chevreuil - Kaisen <kaisen@kaisenlinux.org>
+Standards-Version: 4.6.0
+Build-Depends: debhelper (>= 13),
+	       libzip-dev,
+	       libbz2-dev,
+	       liblzma-dev,
+	       liblzo2-2,
+	       liblzo2-dev,
+               libgcrypt20-dev,
+	       libext2fs-dev,
+	       libblkid-dev,
+	       libattr1-dev,
+	       qtbase5-dev,
+	       qttools5-dev-tools,
+               liblz4-dev,
+Homepage: http://sourceforge.net/projects/qt-fsarchiver/
+Vcs-Browser: https://gitlab.com/kaisenlinux/packages/qt-fsarchiver
+Vcs-Git: https://gitlab.com/kaisenlinux/packages/qt-fsarchiver.git
+
+Package: qt-fsarchiver
+Architecture: amd64
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         samba,
+         sshfs,
+         gdisk,
+         sshpass,
+         nmap,
+         nfs-kernel-server,
+         smbclient,
+         xfsprogs,
+         nfs-common,
+         jfsutils,
+         btrfs-progs,
+         net-tools,
+         ccrypt,
+Description: Program to back up and restore partitions, directories and the MBR/GPT. Clone hard drives and build images of hard drives.
