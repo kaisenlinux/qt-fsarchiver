@@ -59,14 +59,14 @@ isEmpty(DOC_DIR) {
 }
 # install
  target.path = /usr/sbin
+ target1.files = src/sbin/qt-fsarchiver*
+ target1.path = /usr/sbin
  icon.files = src/images/qt-fsarchiver.png
  icon.path = /usr/share/pixmaps
  autostart.files = starter/qt-fsarchiver.desktop
  autostart.path = /usr/share/applications
  doc.files = doc/*
  doc.path = $$DOC_DIR
- findsmb.files = src/sbin
- findsmb.path = /usr
  TRANSLATIONS += translations/qt-fsarchiver_ar.ts \
                 translations/qt-fsarchiver_ca.ts \
                 translations/qt-fsarchiver_ch.ts \
@@ -145,4 +145,4 @@ translations.files = translations/qt-fsarchiver_de.qm \
                 translations/qt-fsarchiver_ur.qm \ 
                 translations/qt-fsarchiver_uk.qm
 translations.path = /usr/share/qt5/translations
-INSTALLS = target icon autostart translations doc findsmb
+INSTALLS = target target1 icon autostart translations doc 

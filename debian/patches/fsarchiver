@@ -1,0 +1,120 @@
+Author: Kevin Chevreuil - Kaisen <kaisen@kaisenlinux.org>
+
+--- qt-fsarchiver-0.8.6.orig/src/mainWindow.cpp
++++ qt-fsarchiver-0.8.6/src/mainWindow.cpp
+@@ -258,43 +258,14 @@ MWindow::MWindow()
+         return;
+         }
+       }
+-   QFile file2("/usr/sbin/qt-fsarchiver-terminal");
++   QFile file2("/usr/sbin/fsarchiver");
+    if(!file2.exists())
+       {
+       QMessageBox::warning(this,tr("Note", "Hinweis"),
+-         	tr("The program qt-fsarchiver-terminal is not installed. You have to install this program additionally.\n", "Das Programm qt-fsarchiver-terminal ist nicht installiert. Sie müssen dieses  Programm zusätzlich installieren.\n"));
++         	tr("The program fsarchiver is not installed. You have to install this program additionally.\n", "Das Programm fsarchiver ist nicht installiert. Sie müssen dieses  Programm zusätzlich installieren.\n"));
+       esc_end(1);
+       return;
+       }
+-      //Version von qt-fsarchiver-terminal prüfen
+-      befehl = "/usr/sbin/qt-fsarchiver-terminal " + userpath + " version";
+-      if (system (befehl.toLatin1().data()))
+-         befehl = "";
+-      QString filename = userpath + "/.config/qt-fsarchiver/version.txt";
+-      QFile file1(filename);
+-      if(file1.open(QIODevice::ReadWrite))
+-         {
+-          QDataStream in(&file1);
+-          QString str;
+-          in >> version;
+-         }
+-       file1.close();
+-       found = version.indexOf(".");
+-       while (found > -1)
+-          {
+-          found = version.indexOf(".");
+-          if(found > -1)
+-             version.replace(found, 1, "");
+-          } 
+-        found = version.indexOf("-");
+-        version.replace(found, 1, "");
+-        int version_  = version.toInt();
+-        version1 ="0.8.6-3";
+-       if (!file1.exists() or 8603 > version_)
+-           {
+-       QMessageBox::warning(this,tr("Note", "Hinweis"),tr("qt-fsarchiver-terminal must be updated to version: ", "qt-fsarchiver-terminal muss auf die Version aktualisiert werden: ") + version1 + tr(" The program is terminated.", " Das Programm wird beendet"));
+-    	return;	
+-          }
+        // Prüfen ob qt-fsarchiver.sh geändert wurde. Eventuell wurde eine echo Befehl zum Auslesen des Passwortes eingefügt.
+        // Bei Ubuntu, Debian, Mint und Suse ist die erste Zeile #!/bin/bash.
+        // Bei Fedora ist die erste Zeile #!/usr/bin/bash. Daher die verschiedenen Ergebnisse.
+@@ -2169,17 +2140,17 @@ void MWindow::esc_end(int flag)
+ QString befehl = "";
+ QString attribute;
+ QString pid_qt_fsarchiver;
+-QString pid_qt_fsarchiver_terminal;
++QString pid_fsarchiver;
+ int ret = 0;
+       pid_qt_fsarchiver = pid_ermitteln_("qt-fsarchiver"); 
+-      pid_qt_fsarchiver_terminal = pid_ermitteln_("qt-fsarchiver-terminal"); 
++      pid_fsarchiver = pid_ermitteln_("fsarchiver"); 
+       if (flag == 0)
+           ret = questionMessage(tr("Do you really want to stop backing up or restoring the partition?", "Wollen Sie wirklich die Sicherung oder Wiederherstellung der Partition beenden?"));
+       if (ret == 1)
+        {
+-       if (pid_qt_fsarchiver_terminal != "")
++       if (pid_fsarchiver != "")
+         {
+-        attribute = "kill -15 " + pid_qt_fsarchiver_terminal;  //qt-fsarchiver-terminal abbrechen
++        attribute = "kill -15 " + pid_fsarchiver;  //fsarchiver abbrechen
+         befehl = "/usr/sbin/qt-fsarchiver.sh  13 " + attribute;  
+         if(system (befehl.toLatin1().data()))
+             befehl = "";    
+@@ -2203,7 +2174,7 @@ int ret = 0;
+          befehl = "/usr/sbin/qt-fsarchiver.sh  13 " + attribute; 
+         if(system (befehl.toLatin1().data()))
+             befehl = "";
+-        attribute = "kill -15 " + pid_qt_fsarchiver;  //qt-fsarchiver-terminal abbrechen
++        attribute = "kill -15 " + pid_qt_fsarchiver;  //fsarchiver abbrechen
+         befehl = "/usr/sbin/qt-fsarchiver.sh  13 " + attribute;  
+         if(system (befehl.toLatin1().data()))
+             befehl = "";
+@@ -2659,8 +2630,8 @@ QString befehl;
+           befehl = "kill -9 " + pid_terminal;  //bash abbrechen, sofortiges Beenden
+           if(system (befehl.toLatin1().data()))
+             befehl = "";
+-          pid_terminal = pid_ermitteln_("qt-fsarchiver-terminal"); 
+-          // befehl = "kill -15 " + pid_terminal;  //qt-fsarchiver-terminal abbrechen, Zeit zum ordentlichen Beenden
++          pid_terminal = pid_ermitteln_("fsarchiver"); 
++          // befehl = "kill -15 " + pid_terminal;  //fsarchiver abbrechen, Zeit zum ordentlichen Beenden
+           befehl = "kill -9 " + pid_terminal;  //bash abbrechen, sofortiges Beenden
+           if(system (befehl.toLatin1().data()))
+             befehl = "";  
+--- qt-fsarchiver-0.8.6.orig/src/net.cpp
++++ qt-fsarchiver-0.8.6/src/net.cpp
+@@ -1737,13 +1737,13 @@ MWindow window;
+ QString befehl;
+ QString attribute;
+ QString pid_qt_fsarchiver;
+-QString pid_qt_fsarchiver_terminal;
++QString pid_fsarchiver;
+       pid_qt_fsarchiver = window.pid_ermitteln_("qt-fsarchiver"); 
+-      pid_qt_fsarchiver_terminal = window.pid_ermitteln_("qt-fsarchiver-terminal");  
++      pid_fsarchiver = window.pid_ermitteln_("fsarchiver");  
+       int ret = questionMessage(tr("Do you really want to stop backing up or restoring the partition?", "Wollen Sie wirklich die Sicherung oder Wiederherstellung der Partition beenden?"));
+       if (ret == 1)
+         {
+-	attribute = "kill -15 " + pid_qt_fsarchiver_terminal;  //qt-fsarchiver-terminal abbrechen
++	attribute = "kill -15 " + pid_fsarchiver;  //fsarchiver abbrechen
+         befehl = "/usr/sbin/qt-fsarchiver.sh  13 " + attribute;  
+         if(system (befehl.toLatin1().data()))
+            befehl = "";
+@@ -1769,7 +1769,7 @@ QString pid_qt_fsarchiver_terminal;
+         befehl = "/usr/sbin/qt-fsarchiver.sh  13 " + attribute; 
+        if(system (befehl.toLatin1().data()))
+            befehl = "";
+-        attribute = "kill -15 " + pid_qt_fsarchiver;  //qt-fsarchiver-terminal abbrechen
++        attribute = "kill -15 " + pid_qt_fsarchiver;  //fsarchiver abbrechen
+         befehl = "/usr/sbin/qt-fsarchiver.sh  13 " + attribute;  
+        if(system (befehl.toLatin1().data()))
+            befehl = "";

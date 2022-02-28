@@ -1,3 +1,10 @@
+qt-fsarchiver (0.8.6-2kaisen) kaisen-packages; urgency=medium
+
+  * Import new revision of the 0.8.6 version
+  * Add quilt patches
+
+ -- Kevin Chevreuil - Kaisen <kaisen@kaisenlinux.org>  Sun, 27 Feb 2022 23:55:55 +0100
+
 qt-fsarchiver (0.8.6-1kaisen) kaisen-packages; urgency=medium
 
   * First packaging for Kaisen Linux

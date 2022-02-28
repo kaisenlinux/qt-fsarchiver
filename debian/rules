@@ -5,9 +5,3 @@
 
 override_dh_auto_configure:
 	/usr/lib/*-linux-gnu/qt5/bin/qmake -o Makefile qt-fsarchiver.pro
-
-override_dh_auto_install:
-	dh_auto_install
-	mkdir -p debian/qt-fsarchiver/usr/bin
-	mv debian/qt-fsarchiver/usr/sbin/qt-fsarchiver debian/qt-fsarchiver/usr/bin/qt-fsarchiver
-	rm -rf debian/qt-fsarchiver/usr/share/applications
