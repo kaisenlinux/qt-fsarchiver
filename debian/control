@@ -2,8 +2,8 @@ Source: qt-fsarchiver
 Section: utils
 Priority: optional
 Maintainer: Kevin Chevreuil - Kaisen <kaisen@kaisenlinux.org>
-Standards-Version: 4.6.0
-Build-Depends: debhelper (>= 13),
+Standards-Version: 4.7.0
+Build-Depends: debhelper-compat (= 13),
 	       libzip-dev,
 	       libbz2-dev,
 	       liblzma-dev,
