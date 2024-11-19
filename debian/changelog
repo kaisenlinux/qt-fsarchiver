@@ -1,3 +1,11 @@
+qt-fsarchiver (2.8.7-1kaisen) kaisen-packages; urgency=medium
+
+  * Import the 2.8.7 release
+  * Drop the debian/patches/fsarchiver patch (no longer needed)
+  * Add the use-sys-instead-of-attr quilt patch 
+
+ -- Kevin Chevreuil - Kaisen <kaisen@kaisenlinux.org>  Tue, 19 Nov 2024 01:16:27 +0200
+
 qt-fsarchiver (1.8.7-1kaisen) kaisen-packages; urgency=medium
 
   * Import the 1.8.7 release
@@ -22,13 +30,3 @@ qt-fsarchiver (0.8.6-1kaisen) kaisen-packages; urgency=medium
   * First packaging for Kaisen Linux
 
  -- Kevin Chevreuil - Kaisen <kaisen@kaisenlinux.org>  Sun, 26 Dec 2021 19:00:34 +0100
- 
-
-
-
-
-
-
-
-
-

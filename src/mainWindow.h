@@ -42,9 +42,11 @@ public:
    QString Zeit_auslesen();
    QString mtab_einlesen(QString partition_if_home);
    QString identify_save_part(QString save_partition);
-   QString beschreibungstext(QString partitiontext, QString text, int zip, int row);
+   QString beschreibungstext(QString partitiontext, QString text, int zip, int row, QString size_folder, QString folder);
    int is_mounted (char* dev_path);
    int questionMessage(QString frage); 
+   int questionMessage_critical(QString frage);
+   int questionMessage_warning(QString frage);
    QString UUID_auslesen(int row);
         
 public slots: 
@@ -74,8 +76,6 @@ protected slots:
    void indicator_reset();
    void keyPressEvent(QKeyEvent *event);
    void restore_button();
-   void eingabe_net_save();
-   void eingabe_net_restore();
    void chkkey();
    void chkhidden();
    void chkGB();
@@ -86,7 +86,6 @@ protected slots:
    int pid_ermitteln();
    void del_mediafolder();
    void clone_save();
-   void clone_save_net();
    void make_order(); 
    void order_edit(); 
    void save_restorePartiiton_list();
@@ -97,7 +96,9 @@ protected slots:
    void zip_setting_einlesen();
    void zip_einlesen();
    void make_direct();
-     
+   int size_determine(QString part_size_compress, QString folder);
+   int question_end();
+    
 private:
     QFileSystemModel *dirModel;
     QItemSelectionModel *selModel;

@@ -1,0 +1,13 @@
+Author: Kevin Chevreuil - Kaisen <kaisen@kaisenlinux.org>
+
+--- qt-fsarchiver-2.8.7.orig/src/oper_restore.c
++++ qt-fsarchiver-2.8.7/src/oper_restore.c
+@@ -24,7 +24,7 @@
+ #include <assert.h>
+ #include <string.h>
+ #include <stdlib.h>
+-#include <attr/xattr.h>
++#include <sys/xattr.h>
+ #include <sys/time.h>
+ #include <sys/stat.h>
+ #include <gcrypt.h>
